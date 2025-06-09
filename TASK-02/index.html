@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <h1>My Webpage</h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#responsive-layout-section">Layout</a></li>
+                <li><a href="#contact-form-section">Contact</a></li>
+                <li><a href="#validation-form-section">Validation</a></li>
+                <li><a href="#todo-list-section">To-Do List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-container">
+
+        <section id="responsive-layout-section" class="layout-section">
+            <h2>1. Responsive Layout(Flexbox & CSS Grid)</h2>
+            <p>This section demonstrates a responsive webpage structure that adapts to different screen sizes. Try resizing your browser window!</p>
+            <div class="main-content-area">
+                <main class="main-content">
+                    <h3>Welcome to Our Site!</h3>
+                    <p>This page uses Flexbox for navigation and CSS Grid for the content area, adjusting seamlessly for desktop, tablet, and mobile views.</p>
+                    <p>On larger screens, you'll see a clear separation between the main content and the sidebar. As the screen size shrinks, the layout will gracefully reflow to stack elements vertically.</p>
+                    <img src="https://via.placeholder.com/600x350/FFDDC1/808080?text=Adaptive+Design" alt="Placeholder image for content">
+                </main>
+
+                <aside class="sidebar">
+                    <h3>Quick Info</h3>
+                    <ul>
+                        <li><a href="#">Learn More</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                    <h3>Contact Info</h3>
+                    <p>Email: info@example.com</p>
+                </aside>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="contact-form-section" class="form-section">
+            <h2>2. Contact Form </h2>
+            <div class="contact-container no-js-validation">
+                <h3>Get Info</h3>
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name-basic">Name:</label>
+                        <input type="text" id="name-basic" name="name-basic" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email-basic">Email:</label>
+                        <input type="email" id="email-basic" name="email-basic" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-basic">Subject:</label>
+                        <input type="text" id="subject-basic" name="subject-basic">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-basic">Message:</label>
+                        <textarea id="message-basic" name="message-basic" rows="4" required></textarea>
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="validation-form-section" class="form-section">
+            <h2>3. Form Validation (JavaScript)</h2>
+            <p>This form demonstrates client-side validation using JavaScript for required fields and email format.</p>
+            <div class="contact-container js-validation">
+                <h3>Send Us a Message</h3>
+                <form class="contact-form" id="contactFormValidated" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name-validated">Name:</label>
+                        <input type="text" id="name-validated" name="name-validated" required>
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email-validated">Email:</label>
+                        <input type="email" id="email-validated" name="email-validated" required>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-validated">Message:</label>
+                        <textarea id="message-validated" name="message-validated" rows="4" required></textarea>
+                        <div class="error-message" id="messageError"></div>
+                    </div>
+
+                    <button type="submit">Submit Form</button>
+                </form>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="todo-list-section" class="todo-section">
+            <h2>4. Dynamic To-Do List (JavaScript)</h2>
+            <p>An interactive to-do list where you can add, mark as complete, and delete tasks.</p>
+            <div class="todo-container">
+                <h3>My Tasks</h3>
+                <div class="input-section">
+                    <input type="text" id="taskInput" placeholder="Add a new task...">
+                    <button id="addTaskBtn">Add Task</button>
+                </div>
+                <ul id="taskList">
+                    </ul>
+            </div>
+        </section>
+
+    </div> <footer class="site-footer">
+        <p>&copy; 2025 Combined Web Projects. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
