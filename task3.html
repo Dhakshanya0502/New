@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FullStack Web Skills Demo - Single File</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        main {
+            padding: 1rem;
+            max-width: 1200px; 
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background-color: #fff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .demo-section h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        #responsive-section .hero {
+            background-color: #007bff;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        #responsive-section .hero h3 {
+            font-size: 2rem; 
+            margin-bottom: 1rem;
+        }
+
+        #responsive-section .hero p {
+            font-size: 1rem;
+        }
+
+        #responsive-section .content-grid {
+            display: flex;
+            flex-direction: column; 
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #responsive-section .card {
+            background-color: #fcfcfc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #responsive-section .hidden-on-mobile {
+            display: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 4rem 0;
+        }
+
+     
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 1rem;
+            }
+
+            #responsive-section .hero h3 {
+                font-size: 3rem;
+            }
+
+            #responsive-section .hero p {
+                font-size: 1.2rem;
+            }
+
+            #responsive-section .content-grid {
+                flex-direction: row;
+                flex-wrap: wrap; 
+                justify-content: center; 
+            }
+
+            #responsive-section .card {
+                flex: 1; 
+                min-width: 300px; 
+                max-width: 45%; 
+            }
+
+            #responsive-section .hidden-on-mobile {
+                display: block;
+                background-color: #e9ecef;
+                padding: 1.5rem;
+                border-radius: 8px;
+                margin-top: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 992px) {
+            #responsive-section .card {
+                max-width: 30%; 
+            }
+        }
+
+
+        #quiz-section .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%; 
+            max-width: 600px; 
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        #quiz-section #quiz-question {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        #quiz-section .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        #quiz-section .quiz-option-btn {
+            background-color: #e9ecef;
+            border: 2px solid #ced4da;
+            color: #333;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
+            width: 100%;
+            text-align: left;
+        }
+
+        #quiz-section .quiz-option-btn:hover {
+            background-color: #d6e9ff;
+            border-color: #007bff;
+            transform: translateY(-2px);
+        }
+
+        #quiz-section .quiz-option-btn.selected {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        #quiz-section .quiz-option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        #quiz-section button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 15px;
+        }
+
+        #quiz-section button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        #quiz-section button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        #quiz-section #quiz-submit-btn {
+            background-color: #007bff;
+        }
+
+        #quiz-section #quiz-submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #quiz-section #quiz-next-btn {
+            background-color: #17a2b8;
+        }
+
+        #quiz-section #quiz-next-btn:hover {
+            background-color: #138496;
+        }
+
+        #quiz-section #quiz-restart-btn {
+            background-color: #6c757d;
+        }
+
+        #quiz-section #quiz-restart-btn:hover {
+            background-color: #5a6268;
+        }
+
+        #quiz-section .feedback {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-height: 25px; 
+        }
+
+        #quiz-section .feedback.correct {
+            color: #28a745;
+        }
+
+        #quiz-section .feedback.incorrect {
+            color: #dc3545;
+        }
+
+        #quiz-section .hidden {
+            display: none;
+        }
+
+        #quiz-section #quiz-result p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        #quiz-section #quiz-score, #quiz-section #quiz-total-questions {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+    
+        @media (max-width: 600px) {
+            #quiz-section .quiz-container {
+                padding: 20px;
+            }
+
+            #quiz-section h3 { 
+                font-size: 1.8rem;
+            }
+
+            #quiz-section #quiz-question {
+                font-size: 1.3rem;
+            }
+
+            #quiz-section .quiz-option-btn, #quiz-section button {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+
+
+        #api-section .api-container {
+            background-color: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        #api-section h3 { 
+            color: #007bff;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        #api-section #api-joke-display {
+            min-height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fcfcfc;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            font-style: italic;
+            color: #555;
+            text-align: center;
+        }
+
+        #api-section #api-joke-display p {
+            margin: 0;
+        }
+
+        #api-section #api-joke-display .placeholder {
+            color: #888;
+            font-style: normal;
+        }
+
+        #api-section button { 
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+        }
+
+        #api-section button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+        }
+
+        #api-section button:active {
+            transform: translateY(-1px);
+        }
+
+        #api-section button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        #api-section #api-loading-message, #api-section #api-error-message {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #api-section #api-loading-message {
+            color: #17a2b8;
+        }
+
+        #api-section #api-error-message {
+            color: #dc3545;
+        }
+
+        #api-section .hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            #api-section .api-container {
+                padding: 25px;
+            }
+
+            #api-section h3 {
+                font-size: 2rem;
+            }
+
+            #api-section #api-joke-display {
+                font-size: 1.1rem;
+                min-height: 100px;
+            }
+
+            #api-section button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #api-section .api-container {
+                padding: 20px;
+            }
+
+            #api-section h3 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            #api-section #api-joke-display {
+                font-size: 1rem;
+                min-height: 80px;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            #api-section button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My FullStack Web Skills Demo</h1>
+        <nav>
+            <ul>
+                <li><a href="#responsive-section">Responsive</a></li>
+                <li><a href="#quiz-section">Quiz</a></li>
+                <li><a href="#api-section">API Fetch</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="responsive-section" class="demo-section">
+            <h2>1. Responsive Layout Demonstration</h2>
+            <div class="hero">
+                <h3>Welcome to a Flexible Layout</h3>
+                <p>This content adapts to your screen size. Try resizing your browser window!</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Card 1</h3>
+                    <p>This is some content for card 1. On small screens, these cards will stack.</p>
+                </div>
+                <div class="card">
+                    <h3>Card 2</h3>
+                    <p>More content for card 2. On larger screens, they'll display side-by-side.</p>
+                </div>
+                <div class="card">
+                    <h3>Card 3</h3>
+                    <p>Even more content for card 3. Let's see how they arrange themselves.</p>
+                </div>
+            </div>
+
+            <div class="hidden-on-mobile">
+                <h3>Desktop Feature</h3>
+                <p>This section is only visible on larger screens (tablets and desktops).</p>
+            </div>
+        </section>
+
+        <hr> <section id="quiz-section" class="demo-section">
+            <h2>2. Interactive Quiz</h2>
+            <div id="quiz-container" class="quiz-container">
+                <div id="quiz-display">
+                    <div id="quiz-question">Question text will go here?</div>
+                    <div id="quiz-options" class="options-container">
+                        <button class="quiz-option-btn" data-answer="A">Option A</button>
+                        <button class="quiz-option-btn" data-answer="B">Option B</button>
+                        <button class="quiz-option-btn" data-answer="C">Option C</button>
+                        <button class="quiz-option-btn" data-answer="D">Option D</button>
+                    </div>
+                    <button id="quiz-submit-btn">Submit Answer</button>
+                    <div id="quiz-feedback" class="feedback"></div>
+                    <button id="quiz-next-btn" class="hidden">Next Question</button>
+                </div>
+                <div id="quiz-result" class="hidden">
+                    <h3>Quiz Complete!</h3>
+                    <p>Your score: <span id="quiz-score">0</span> out of <span id="quiz-total-questions">0</span></p>
+                    <button id="quiz-restart-btn">Restart Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <hr> <section id="api-section" class="demo-section">
+            <h2>3. Fetch Data from a Public API</h2>
+            <div id="api-container" class="api-container">
+                <h3>Random Joke Generator</h3>
+                <div id="api-joke-display">
+                    <p class="placeholder">Click the button to get a joke!</p>
+                </div>
+                <button id="api-get-joke-btn">Get New Joke</button>
+                <p id="api-loading-message" class="hidden">Loading joke...</p>
+                <p id="api-error-message" class="hidden error">Failed to fetch joke. Please try again.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FullStack Web Skills Demo. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            function initializeQuiz() {
+                const questions = [
+                    {
+                        question: "What is the capital of France?",
+                        options: { A: "Berlin", B: "Madrid", C: "Paris", D: "Rome" },
+                        correctAnswer: "C"
+                    },
+                    {
+                        question: "Which planet is known as the Red Planet?",
+                        options: { A: "Earth", B: "Mars", C: "Jupiter", D: "Venus" },
+                        correctAnswer: "B"
+                    },
+                    {
+                        question: "What is 7 * 8?",
+                        options: { A: "49", B: "56", C: "64", D: "72" },
+                        correctAnswer: "B"
+                    },
+                    {
+                        question: "What is the largest ocean on Earth?",
+                        options: { A: "Atlantic", B: "Indian", C: "Arctic", D: "Pacific" },
+                        correctAnswer: "D"
+                    }
+                ];
+
+                let currentQuestionIndex = 0;
+                let score = 0;
+                let selectedAnswer = null;
+
+                const quizDisplayDiv = document.getElementById('quiz-display');
+                const questionEl = document.getElementById('quiz-question');
+                const optionsEl = document.getElementById('quiz-options');
+                const submitBtn = document.getElementById('quiz-submit-btn');
+                const feedbackEl = document.getElementById('quiz-feedback');
+                const nextBtn = document.getElementById('quiz-next-btn');
+                const resultDiv = document.getElementById('quiz-result');
+                const scoreSpan = document.getElementById('quiz-score');
+                const totalQuestionsSpan = document.getElementById('quiz-total-questions');
+                const restartBtn = document.getElementById('quiz-restart-btn');
+
+                function loadQuestion() {
+                    const currentQuestion = questions[currentQuestionIndex];
+                    questionEl.textContent = currentQuestion.question;
+                    optionsEl.innerHTML = ''; 
+                    selectedAnswer = null; 
+                    submitBtn.disabled = true; 
+                    feedbackEl.textContent = ''; 
+                    feedbackEl.classList.remove('correct', 'incorrect');
+                    nextBtn.classList.add('hidden');
+
+                    for (const key in currentQuestion.options) {
+                        const button = document.createElement('button');
+                        button.classList.add('quiz-option-btn'); 
+                        button.dataset.answer = key;
+                        button.textContent = `${key}: ${currentQuestion.options[key]}`;
+                        button.addEventListener('click', () => selectOption(button, key));
+                        optionsEl.appendChild(button);
+                    }
+                }
+
+                function selectOption(selectedButton, answerKey) {
+                
+                    document.querySelectorAll('#quiz-options .quiz-option-btn').forEach(btn => { // Scope selector
+                        btn.classList.remove('selected');
+                    });
+       
+                    selectedButton.classList.add('selected');
+                    selectedAnswer = answerKey;
+                    submitBtn.disabled = false;
+                }
+
+                function checkAnswer() {
+                    if (selectedAnswer === null) {
+                        feedbackEl.textContent = 'Please select an answer!';
+                        feedbackEl.classList.remove('correct');
+                        feedbackEl.classList.add('incorrect');
+                        return;
+                    }
+
+                    const currentQuestion = questions[currentQuestionIndex];
+                    if (selectedAnswer === currentQuestion.correctAnswer) {
+                        score++;
+                        feedbackEl.textContent = 'Correct!';
+                        feedbackEl.classList.add('correct');
+                        feedbackEl.classList.remove('incorrect');
+                    } else {
+                        feedbackEl.textContent = `Incorrect. The correct answer was ${currentQuestion.correctAnswer}.`;
+                        feedbackEl.classList.add('incorrect');
+                        feedbackEl.classList.remove('correct');
+                    }
+
+               
+                    document.querySelectorAll('#quiz-options .quiz-option-btn').forEach(btn => {
+                        btn.disabled = true;
+                    });
+                    submitBtn.disabled = true;
+                    nextBtn.classList.remove('hidden');
+                }
+
+                function showResult() {
+                    quizDisplayDiv.classList.add('hidden');
+                    resultDiv.classList.remove('hidden');
+                    scoreSpan.textContent = score;
+                    totalQuestionsSpan.textContent = questions.length;
+                }
+
+                function restartQuiz() {
+                    currentQuestionIndex = 0;
+                    score = 0;
+                    selectedAnswer = null;
+                    resultDiv.classList.add('hidden');
+                    quizDisplayDiv.classList.remove('hidden');
+                    loadQuestion();
+                }
+
+                submitBtn.addEventListener('click', checkAnswer);
+                nextBtn.addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        loadQuestion();
+                    } else {
+                        showResult();
+                    }
+                });
+                restartBtn.addEventListener('click', restartQuiz);
+
+                loadQuestion();
+            }
+            function initializeApiFetcher() {
+                const getJokeBtn = document.getElementById('api-get-joke-btn');
+                const jokeDisplay = document.getElementById('api-joke-display');
+                const loadingMessage = document.getElementById('api-loading-message');
+                const errorMessage = document.getElementById('api-error-message');
+
+                function hideMessages() {
+                    loadingMessage.classList.add('hidden');
+                    errorMessage.classList.add('hidden');
+                    const placeholderP = jokeDisplay.querySelector('.placeholder');
+                    if (placeholderP) {
+                        placeholderP.classList.add('hidden');
+                    }
+                }
+
+                function displayJoke(jokeText) {
+                    hideMessages();
+                    jokeDisplay.innerHTML = `<p>${jokeText}</p>`;
+                }
+
+                function showLoading() {
+                    hideMessages();
+                    loadingMessage.classList.remove('hidden');
+                    getJokeBtn.disabled = true;
+                    jokeDisplay.innerHTML = '<p class="placeholder">Fetching a hilarious joke...</p>';
+                }
+
+                function showError() {
+                    hideMessages();
+                    errorMessage.classList.remove('hidden');
+                    getJokeBtn.disabled = false;
+                    jokeDisplay.innerHTML = '<p class="placeholder">Could not load joke.</p>';
+                }
+
+                async function fetchJoke() {
+                    showLoading();
+
+                    const apiUrl = 'https://v2.jokeapi.dev/joke/Any?blacklistFlags=racist,sexist&type=single';
+
+                    try {
+                        const response = await fetch(apiUrl);
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+
+                        if (data.joke) {
+                            displayJoke(data.joke);
+                        } else if (data.setup && data.delivery) {
+                            displayJoke(`${data.setup}<br><br>${data.delivery}`);
+                        } else {
+                            throw new Error("No joke found in response.");
+                        }
+                    } catch (error) {
+                        console.error('Error fetching joke:', error);
+                        showError();
+                    } finally {
+                        getJokeBtn.disabled = false;
+                    }
+                }
+
+                getJokeBtn.addEventListener('click', fetchJoke);
+
+                fetchJoke();
+            }
+
+            initializeQuiz();
+            initializeApiFetcher();
+
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
